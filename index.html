@@ -196,6 +196,333 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
+        /* 3D Animation Styles */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-3d {
+            transform-style: preserve-3d;
+        }
+
+        /* Keyframe Animations */
+        @keyframes float-3d {
+
+            0%,
+            100% {
+                transform: translateY(0) rotateX(0) rotateY(0);
+            }
+
+            25% {
+                transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotateX(0) rotateY(10deg);
+            }
+
+            75% {
+                transform: translateY(-10px) rotateX(-5deg) rotateY(5deg);
+            }
+        }
+
+        @keyframes float-3d-delayed {
+
+            0%,
+            100% {
+                transform: translateY(0) rotateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px) rotateY(180deg);
+            }
+        }
+
+        @keyframes bounce-3d {
+
+            0%,
+            100% {
+                transform: translateY(0) rotateZ(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotateZ(180deg);
+            }
+        }
+
+        @keyframes sphere-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(79, 70, 229, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.1);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(79, 70, 229, 0.5), inset 0 0 50px rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        @keyframes spin-slow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin-reverse {
+            from {
+                transform: rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes orbit {
+            from {
+                transform: rotate(0deg) translateX(150px) rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg) translateX(150px) rotate(-360deg);
+            }
+        }
+
+        @keyframes orbit-reverse {
+            from {
+                transform: rotate(360deg) translateX(160px) rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0deg) translateX(160px) rotate(0deg);
+            }
+        }
+
+        @keyframes text-glow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 5px rgba(79, 70, 229, 0.5);
+            }
+
+            50% {
+                text-shadow: 0 0 20px rgba(79, 70, 229, 0.8);
+            }
+        }
+
+        @keyframes slide-down {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slide-in-right {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slide-in-left {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slide-in-up {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes expand {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 6rem;
+            }
+        }
+
+        @keyframes bounce-gentle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-gentle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        @keyframes float-slow {
+
+            0%,
+            100% {
+                transform: translateY(0) rotateX(0);
+            }
+
+            50% {
+                transform: translateY(-10px) rotateX(2deg);
+            }
+        }
+
+        /* Animation Classes */
+        .animate-float-3d {
+            animation: float-3d 6s ease-in-out infinite;
+        }
+
+        .animate-float-3d-delayed {
+            animation: float-3d-delayed 8s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .animate-bounce-3d {
+            animation: bounce-3d 4s ease-in-out infinite;
+        }
+
+        .animate-sphere-pulse {
+            animation: sphere-pulse 4s ease-in-out infinite;
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 20s linear infinite;
+        }
+
+        .animate-spin-reverse {
+            animation: spin-reverse 15s linear infinite;
+        }
+
+        .animate-orbit {
+            animation: orbit 20s linear infinite;
+        }
+
+        .animate-orbit-reverse {
+            animation: orbit-reverse 25s linear infinite;
+        }
+
+        .animate-text-glow {
+            animation: text-glow 3s ease-in-out infinite;
+        }
+
+        .animate-slide-down {
+            animation: slide-down 1s ease-out;
+        }
+
+        .animate-slide-in-right {
+            animation: slide-in-right 1s ease-out;
+        }
+
+        .animate-slide-in-left {
+            animation: slide-in-left 1s ease-out;
+        }
+
+        .animate-slide-in-up {
+            animation: slide-in-up 1s ease-out;
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 1s ease-out;
+        }
+
+        .animate-expand {
+            animation: expand 1s ease-out;
+        }
+
+        .animate-bounce-gentle {
+            animation: bounce-gentle 2s ease-in-out infinite;
+        }
+
+        .animate-float-gentle {
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        .animate-float-slow {
+            animation: float-slow 8s ease-in-out infinite;
+        }
+
+        .animate-fade-in {
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .animate-text-reveal {
+            animation: slide-in-up 1s ease-out;
+        }
+
+        /* 3D Transform Utilities */
+        .rotate-y-12 {
+            transform: rotateY(12deg);
+        }
+
+        .rotate-x-2 {
+            transform: rotateX(2deg);
+        }
+
+        .rotate-x-3 {
+            transform: rotateX(3deg);
+        }
+
+        .translate-z-4 {
+            transform: translateZ(4px);
+        }
+
+        .translate-y-2 {
+            transform: translateY(2px);
+        }
+
         /* Contact form */
         .form-input:focus {
             outline: none;
@@ -824,62 +1151,166 @@
             </div>
         </div>
     </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 px-6 md:px-12 bg-gray-50">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">About <span class="text-indigo-600">Me</span>
-            </h2>
-
-            <div class="flex flex-col md:flex-row items-center gap-8">
-                <div class="md:w-1/3 mb-8 md:mb-0">
-                    <div class="w-50 h-80 rounded-full overflow-hidden shadow-xl mx-auto">
-                        <img src="Images/White.png" alt="about-section" class="w-full h-full object-cover">
-                    </div>
-                </div>
-
-                <div class="md:w-2/3">
-                    <p class="text-gray-700 mb-4 text-lg leading-relaxed" style="text-align: justify;">My name is Shaik
-                        Jaleel Basha, a 24-year-old tech enthusiast with a strong passion for technology and
-                        problem-solving. I hold a Bachelor’s degree in Information Technology, where I laid a solid
-                        foundation in computer science and honed my analytical thinking. Throughout my academic journey,
-                        I have remained deeply committed to continuous learning, with a keen interest in areas like web
-                        development and automation testing. I thrive in collaborative environments and am always eager
-                        to explore new tools, technologies, and innovations that push the boundaries of what's possible.
-                    </p>
-                    <p class="text-gray-700 mb-4 text-lg leading-relaxed">When I'm not coding, you can find me hiking in
-                        the mountains, reading sci-fi novels, or experimenting with new recipes in the kitchen. I'm a
-                        firm believer that great software, like great food, requires both precision and creativity.</p>
-
-                    <div class="flex flex-wrap gap-4 mt-6">
-                        <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-indigo-600 mr-2"></i>
-                            <span class="text-gray-700">Andhra Pradesh, India</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope text-indigo-600 mr-2"></i>
-                            <span class="text-gray-700">jaleel6jb@gmail.com</span>
-                        </div>
-                    </div>
-
-                    <div class="flex space-x-4 mt-8">
-                        <a href="https://github.com/Jaleeljb"
-                            class="social-icon w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition duration-300">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/jaeel-basha-shaik-6a8056210/"
-                            class="social-icon w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition duration-300">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://x.com/JaleelBashaJb?t=wuTuBW-xw0mdhSZhUBjVGA&s=09"
-                            class="social-icon w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition duration-300">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        </a>
-                    </div>
-                </div>
+    <!-- About Section - 3D Animated with Sphere Image -->
+    <section id="about" class="py-20 px-6 md:px-12 bg-gray-50 relative overflow-hidden perspective-1000">
+        <!-- 3D Animated background elements -->
+        <div class="absolute inset-0 opacity-10">
+            <div
+                class="floating-shape absolute top-20 left-20 w-32 h-32 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full animate-float-3d">
+            </div>
+            <div
+                class="floating-shape absolute bottom-32 right-32 w-24 h-24 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full animate-float-3d-delayed">
+            </div>
+            <div
+                class="floating-shape absolute top-1/2 left-1/4 w-16 h-16 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full animate-bounce-3d">
             </div>
         </div>
+
+        <div class="container mx-auto max-w-6xl relative z-10">
+            <!-- 3D Animated header -->
+            <div class="text-center mb-12 animate-slide-down">
+
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-in">About <span
+                        class="text-indigo-600">Me</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+
+                <!-- 3D Sphere Profile Image Section -->
+                <div class="lg:col-span-2 flex justify-center">
+                    <div class="relative animate-float-slow">
+                        <!-- 3D Sphere container -->
+                        <div class="sphere-container relative">
+                            <!-- Outer ring animation -->
+                            <div
+                                class="absolute inset-0 w-80 h-80 rounded-full border-2 border-indigo-300/30 animate-spin-slow">
+                            </div>
+                            <div
+                                class="absolute inset-4 w-72 h-72 rounded-full border border-purple-300/20 animate-spin-reverse">
+                            </div>
+
+                            <!-- Main sphere -->
+                            <div class="relative w-80 h-80 mx-auto">
+                                <!-- 3D Sphere effect -->
+                                <div
+                                    class="w-full h-full rounded-full bg-gradient-to-br from-white via-gray-50 to-gray-100 shadow-2xl transform-3d hover:rotate-y-12 transition-transform duration-700 relative overflow-hidden animate-sphere-pulse">
+
+                                    <!-- Glossy overlay for sphere effect -->
+                                    <div
+                                        class="absolute inset-0 rounded-full bg-gradient-to-br from-white/40 via-transparent to-black/10">
+                                    </div>
+
+                                    <!-- Image container with sphere clipping -->
+                                    <div class="absolute inset-4 rounded-full overflow-hidden shadow-inner">
+                                        <img src="Images/White.png" alt="Shaik Jaleel Basha"
+                                            class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700">
+                                        <!-- Sphere lighting effect -->
+                                        <div
+                                            class="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-transparent to-purple-600/30 rounded-full">
+                                        </div>
+                                    </div>
+
+                                    <!-- 3D highlight -->
+                                    <div
+                                        class="absolute top-16 left-16 w-24 h-24 bg-white/30 rounded-full blur-xl animate-pulse">
+                                    </div>
+                                </div>
+
+                                <!-- Orbit elements -->
+                                <div
+                                    class="orbit-element absolute top-1/4 -left-8 w-4 h-4 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full animate-orbit">
+                                </div>
+                                <div
+                                    class="orbit-element absolute bottom-1/4 -right-8 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-orbit-reverse">
+                                </div>
+                            </div>
+
+                            <!-- Personal info with 3D card -->
+                            <div
+                                class="mt-8 text-center space-y-3 bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl transform-3d hover:translate-y-2 transition-transform duration-500">
+                                <h3 class="text-2xl font-bold text-gray-800 animate-text-reveal">Shaik Jaleel Basha</h3>
+                                <div
+                                    class="inline-flex items-center bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-semibold hover:scale-105 transition-transform">
+                                    <i class="fas fa-code mr-2 animate-spin-slow"></i>
+                                    IT Professional
+                                </div>
+                                <div class="flex items-center justify-center text-gray-600 pt-2">
+                                    <i class="fas fa-map-marker-alt text-indigo-500 mr-2 animate-pulse"></i>
+                                    <span class="text-sm">Andhra Pradesh, India</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Section with 3D animations -->
+                <div class="lg:col-span-3 space-y-6">
+
+                    <!-- 3D Professional Profile Card -->
+                    <div
+                        class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform-3d hover:translate-y-1 hover:rotate-x-2 animate-slide-in-right">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-full flex items-center justify-center mr-4 animate-spin-slow hover:scale-110 transition-transform">
+                                <i class="fas fa-user text-white text-lg"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">Professional Profile</h3>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed animate-fade-in">
+                            I'm <strong class="text-indigo-600 animate-text-glow">Shaik Jaleel Basha</strong>, a
+                            passionate 24-year-old
+                            tech professional with a <strong class="text-indigo-600">Bachelor's in Information
+                                Technology</strong>. Specializing in <strong class="text-indigo-600">web development and
+                                automation testing</strong>, I thrive on solving complex problems and building
+                            innovative digital solutions.
+                        </p>
+                    </div>
+
+                    <!-- 3D Beyond Code Card -->
+                    <div
+                        class="bg-gradient-to-r from-slate-800 to-gray-900 text-white rounded-2xl p-6 relative overflow-hidden shadow-2xl transform-3d hover:rotate-x-2 transition-transform duration-500 animate-slide-in-up">
+                        <!-- 3D Decorative elements -->
+                        <div
+                            class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-cyan-400/20 to-blue-500/20 rounded-full animate-pulse blur-xl">
+                        </div>
+                        <div class="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-br from-purple-400/20 to-pink-500/20 rounded-full animate-pulse blur-lg"
+                            style="animation-delay: 1s"></div>
+
+                        <div class="relative">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-heart text-pink-400 text-xl mr-3 animate-pulse"></i>
+                                <h3 class="text-xl font-bold">Beyond Code</h3>
+                            </div>
+                            <p class="leading-relaxed opacity-90 mb-4">
+                                When not coding, I enjoy <strong>listining music</strong> and <strong>exploring the
+                                    internet</strong>. I believe great software, requires both
+                                precision and creativity.
+                            </p>
+
+                            <!-- 3D Interest badges -->
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="bg-white/20 px-3 py-1 rounded-full text-sm hover:scale-110 transition-transform cursor-pointer animate-float-gentle">
+                                    Music </span>
+                                <span
+                                    class="bg-white/20 px-3 py-1 rounded-full text-sm hover:scale-110 transition-transform cursor-pointer animate-float-gentle"
+                                    style="animation-delay: 0.2s"> Exploring Internet</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3D Call-to-action with Contact Form Link -->
+                    <div class="text-center mt-12 animate-fade-in-up" style="animation-delay: 1s">
+                        <a href="#contact"
+                            class="inline-flex items-center bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-full px-6 py-3 hover:shadow-lg transition-all transform-3d hover:translate-y-1 hover:scale-105 cursor-pointer group">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-ping mr-3 group-hover:bg-green-500">
+                            </div>
+                            <span class="text-gray-700 font-medium group-hover:text-gray-800">Ready to collaborate and
+                                create amazing solutions!</span>
+                            <i
+                                class="fas fa-arrow-right text-indigo-600 ml-3 animate-bounce-gentle group-hover:text-indigo-700 transform group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
     </section>
 
     <!-- Contact Section -->
