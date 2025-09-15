@@ -1,17 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaleel's Portfolio</title>
     <link rel="icon" href="Images/logo.png" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        /* ================= PRELOADER FIX ================= */
+        .preloader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e8f4fd 0%, #fce7f3 25%, #f0f9ff 50%, #fef3e2 75%, #f3e8ff 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            /* Ensure it stays above navbar */
+        }
+
+
+        .letter {
+            color: #1e293b;
+            font-size: 6vw;
+            opacity: 0;
+            transform: translateY(50px);
+            position: relative;
+            transition: all 0.3s ease;
+            font-family: 'Allura', cursive;
+        }
+
+
+        .glow {
+            position: absolute;
+            width: 30vw;
+            height: 30vw;
+            max-width: 300px;
+            max-height: 300px;
+            background: transparent;
+            border-radius: 50%;
+            opacity: 0;
+            z-index: -1;
+        }
+
+
+        .loading-text {
+            margin-top: 2rem;
+            color: rgba(30, 41, 59, 0.7);
+            font-size: 1.2vw;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+        }
+
+
+        .progress-bar {
+            margin-top: 1rem;
+            width: 30vw;
+        }
 
         :root {
             --primary: #4f46e5;
@@ -1457,6 +1515,23 @@
 </head>
 
 <body>
+
+    <div class="preloader-container">
+        <div class="name-container">
+            <span class="letter" id="J">J</span>
+            <span class="letter" id="A">a</span>
+            <span class="letter" id="L">l</span>
+            <span class="letter" id="E1">e</span>
+            <span class="letter" id="E2">e</span>
+            <span class="letter" id="L2">l</span>
+            <div class="glow" id="glow"></div>
+        </div>
+        <div class="loading-text" id="loading-text">Loading Creativity</div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+    </div>
+
     <!-- Enhanced Sticky Navbar -->
     <nav class="navbar" id="navbar">
         <div class="flex justify-between items-center py-4 px-6 md:px-12">
@@ -2569,6 +2644,70 @@
 
     <!-- Enhanced Scripts -->
     <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const letters = ['J', 'A', 'L', 'E1', 'E2', 'L2'];
+            const glow = document.getElementById('glow');
+            const loadingText = document.getElementById('loading-text');
+            const progress = document.getElementById('progress');
+
+
+            letters.forEach((letterId, index) => {
+                anime({
+                    targets: `#${letterId}`,
+                    opacity: [0, 1],
+                    translateY: [50, 0],
+                    duration: 800,
+                    delay: index * 100,
+                    easing: 'easeOutExpo',
+                });
+            });
+
+
+            anime({
+                targets: '#glow',
+                opacity: [0, 0.6],
+                scale: [0.5, 1],
+                duration: 1500,
+                delay: 800,
+                easing: 'easeOutExpo',
+            });
+
+
+            anime({
+                targets: '#loading-text',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 800,
+                delay: 1200,
+                easing: 'easeOutExpo',
+            });
+
+
+            let progressValue = 0;
+            const progressInterval = setInterval(() => {
+                progressValue += Math.random() * 10;
+                if (progressValue >= 100) {
+                    progressValue = 100;
+                    clearInterval(progressInterval);
+
+
+                    setTimeout(() => {
+                        anime({
+                            targets: '.preloader-container',
+                            opacity: 0,
+                            duration: 800,
+                            easing: 'easeOutExpo',
+                            complete: () => {
+                                document.querySelector('.preloader-container').style.display = 'none';
+                                document.body.style.overflow = 'auto';
+                            }
+                        });
+                    }, 500);
+                }
+                progress.style.width = `${progressValue}%`;
+            }, 200);
+        });
         // Enhanced Sticky Navbar with better responsiveness
         let lastScrollTop = 0;
         let scrollTimeout;
