@@ -2657,7 +2657,7 @@
                     targets: `#${letterId}`,
                     opacity: [0, 1],
                     translateY: [50, 0],
-                    duration: 800,
+                    duration: 600,
                     delay: index * 100,
                     easing: 'easeOutExpo',
                 });
@@ -2668,8 +2668,8 @@
                 targets: '#glow',
                 opacity: [0, 0.6],
                 scale: [0.5, 1],
-                duration: 1500,
-                delay: 800,
+                duration: 1000,
+                delay: 500,
                 easing: 'easeOutExpo',
             });
 
@@ -2678,15 +2678,15 @@
                 targets: '#loading-text',
                 opacity: [0, 1],
                 translateY: [20, 0],
-                duration: 800,
-                delay: 1200,
+                duration: 600,
+                delay: 800,
                 easing: 'easeOutExpo',
             });
 
 
             let progressValue = 0;
             const progressInterval = setInterval(() => {
-                progressValue += Math.random() * 10;
+                progressValue += Math.random() * 25;
                 if (progressValue >= 100) {
                     progressValue = 100;
                     clearInterval(progressInterval);
@@ -2696,17 +2696,17 @@
                         anime({
                             targets: '.preloader-container',
                             opacity: 0,
-                            duration: 800,
+                            duration: 600,
                             easing: 'easeOutExpo',
                             complete: () => {
                                 document.querySelector('.preloader-container').style.display = 'none';
                                 document.body.style.overflow = 'auto';
                             }
                         });
-                    }, 500);
+                    }, 200);
                 }
                 progress.style.width = `${progressValue}%`;
-            }, 200);
+            }, 100);
         });
         // Enhanced Sticky Navbar with better responsiveness
         let lastScrollTop = 0;
