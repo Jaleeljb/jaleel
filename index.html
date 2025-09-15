@@ -33,7 +33,7 @@
 
 
         .letter {
-            color: #1e293b;
+            color: #4f46e5;
             font-size: 6vw;
             opacity: 0;
             transform: translateY(50px);
@@ -58,7 +58,7 @@
 
         .loading-text {
             margin-top: 2rem;
-            color: rgba(30, 41, 59, 0.7);
+            color: #4f46e5;
             font-size: 1.2vw;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -69,6 +69,39 @@
         .progress-bar {
             margin-top: 1rem;
             width: 30vw;
+            max-width: 300px;
+            height: 2px;
+            background: #4f46e5;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+
+        .progress {
+            height: 100%;
+            width: 0;
+            background: #4f46e5;
+            transition: width 0.3s ease;
+        }
+
+
+        @media (max-width: 640px) {
+            .letter {
+                font-size: 16vw;
+                /* Increased font size for mobile */
+                font-weight: 500;
+                /* Reduced thickness */
+                color: #4f46e5;
+                /* Indigo font color */
+                -webkit-text-stroke: 0.5px #4f46e5;
+                /* subtle stroke for clarity */
+            }
+        }
+
+
+        .loading-text {
+            font-size: 16px;
+            /* Slightly larger for readability */
         }
 
         :root {
@@ -1526,7 +1559,7 @@
             <span class="letter" id="L2">l</span>
             <div class="glow" id="glow"></div>
         </div>
-        <div class="loading-text" id="loading-text">Loading Creativity</div>
+        <div class="loading-text" id="loading-text">Crafting Portfolio</div>
         <div class="progress-bar">
             <div class="progress" id="progress"></div>
         </div>
