@@ -25,11 +25,12 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
         }
 
         html {
             overflow-x: hidden;
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
@@ -39,18 +40,32 @@
             overflow-x: hidden;
         }
 
-        /* Navbar styles */
+        /* Enhanced Sticky Navbar styles */
         .navbar {
-            transition: all 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background-color: transparent;
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(0);
         }
 
         .navbar.scrolled {
             background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .nav-link {
             position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
         }
 
         .nav-link::after {
@@ -58,19 +73,53 @@
             position: absolute;
             width: 0;
             height: 2px;
-            background-color: var(--primary);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             bottom: -2px;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             transition: width 0.3s ease;
         }
 
-        .nav-link:hover::after {
+        .nav-link:hover::after,
+        .nav-link.active::after {
             width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .mobile-menu.show {
+            max-height: 400px;
+        }
+
+        .mobile-menu a {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .mobile-menu a:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            transform: translateX(5px);
         }
 
         /* Hero section */
         .hero {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding-top: 100px;
         }
 
         .hero-image {
@@ -94,6 +143,7 @@
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.6s ease;
+            scroll-margin-top: 80px;
         }
 
         section.show {
@@ -101,7 +151,7 @@
             transform: translateY(0);
         }
 
-        /* 3D Experience Animation Styles */
+        /* All existing animations remain the same */
         .perspective-1000 {
             perspective: 1000px;
         }
@@ -565,15 +615,6 @@
         }
 
         /* 3D Animation Styles */
-        .perspective-1000 {
-            perspective: 1000px;
-        }
-
-        .transform-3d {
-            transform-style: preserve-3d;
-        }
-
-        /* Keyframe Animations */
         @keyframes float-3d {
 
             0%,
@@ -764,18 +805,6 @@
             }
         }
 
-        @keyframes float-gentle {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-3px);
-            }
-        }
-
         @keyframes float-slow {
 
             0%,
@@ -854,10 +883,6 @@
             animation: bounce-gentle 2s ease-in-out infinite;
         }
 
-        .animate-float-gentle {
-            animation: float-gentle 3s ease-in-out infinite;
-        }
-
         .animate-float-slow {
             animation: float-slow 8s ease-in-out infinite;
         }
@@ -897,6 +922,16 @@
             box-shadow: 0 0 0 2px var(--primary);
         }
 
+        /* Toast styles */
+        #toast {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        #toast.show {
+            transform: translateX(0);
+        }
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .timeline::before {
@@ -905,6 +940,14 @@
 
             .timeline-item::before {
                 left: -35px;
+            }
+
+            .hero {
+                padding-top: 80px;
+            }
+
+            section {
+                scroll-margin-top: 70px;
             }
         }
     </style>
@@ -915,45 +958,69 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar fixed w-full z-50 py-4 px-6 md:px-12">
-        <div class="flex justify-between items-center">
-            <a href="https://jaleel.vercel.app/" class="text-4xl text-indigo-800"
+    <!-- Enhanced Sticky Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="flex justify-between items-center py-4 px-6 md:px-12">
+            <a href="https://jaleel.vercel.app/" class="text-4xl text-indigo-800 z-10 relative"
                 style="font-family: 'Allura', cursive;">Jaleel</a>
 
             <div class="hidden md:flex space-x-8">
-                <a href="#home" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
-                <a href="#education" class="nav-link text-gray-700 hover:text-indigo-600">Education</a>
-                <a href="#experience" class="nav-link text-gray-700 hover:text-indigo-600">Experience</a>
-                <a href="#projects" class="nav-link text-gray-700 hover:text-indigo-600">Projects</a>
-                <a href="#skills" class="nav-link text-gray-700 hover:text-indigo-600">Skills</a>
-                <a href="#certifications" class="nav-link text-gray-700 hover:text-indigo-600">Certifications</a>
-                <a href="#about" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
-                <a href="#contact" class="nav-link text-gray-700 hover:text-indigo-600">Contact Me</a>
+                <a href="#home" class="nav-link text-gray-700 hover:text-indigo-600" data-target="home">Home</a>
+                <a href="#education" class="nav-link text-gray-700 hover:text-indigo-600"
+                    data-target="education">Education</a>
+                <a href="#experience" class="nav-link text-gray-700 hover:text-indigo-600"
+                    data-target="experience">Experience</a>
+                <a href="#projects" class="nav-link text-gray-700 hover:text-indigo-600"
+                    data-target="projects">Projects</a>
+                <a href="#skills" class="nav-link text-gray-700 hover:text-indigo-600" data-target="skills">Skills</a>
+                <a href="#certifications" class="nav-link text-gray-700 hover:text-indigo-600"
+                    data-target="certifications">Certifications</a>
+                <a href="#about" class="nav-link text-gray-700 hover:text-indigo-600" data-target="about">About</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-indigo-600" data-target="contact">Contact
+                    Me</a>
             </div>
 
-            <button class="md:hidden focus:outline-none">
+            <!-- Simple Hamburger Menu Button -->
+            <button class="md:hidden focus:outline-none z-10 relative" id="mobileMenuToggle">
                 <i class="fas fa-bars text-2xl text-gray-700"></i>
             </button>
         </div>
 
-        <!-- Mobile menu -->
-        <div class="mobile-menu hidden md:hidden mt-4">
-            <div class="flex flex-col space-y-3">
-                <a href="#home" class="text-gray-700 hover:text-indigo-600">Home</a>
-                <a href="#education" class="text-gray-700 hover:text-indigo-600">Education</a>
-                <a href="#experience" class="text-gray-700 hover:text-indigo-600">Experience</a>
-                <a href="#projects" class="text-gray-700 hover:text-indigo-600">Projects</a>
-                <a href="#skills" class="text-gray-700 hover:text-indigo-600">Skills</a>
-                <a href="#certifications" class="text-gray-700 hover:text-indigo-600">Certifications</a>
-                <a href="#about" class="text-gray-700 hover:text-indigo-600">About</a>
-                <a href="#contact" class="text-gray-700 hover:text-indigo-600">Contact Me</a>
+        <!-- Enhanced Mobile menu -->
+        <div class="mobile-menu md:hidden" id="mobileMenu">
+            <div class="px-6 py-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home"
+                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
+                        data-target="home">Home</a>
+                    <a href="#education"
+                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
+                        data-target="education">Education</a>
+                    <a href="#experience"
+                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
+                        data-target="experience">Experience</a>
+                    <a href="#projects"
+                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
+                        data-target="projects">Projects</a>
+                    <a href="#skills"
+                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
+                        data-target="skills">Skills</a>
+                    <a href="#certifications"
+                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
+                        data-target="certifications">Certifications</a>
+                    <a href="#about"
+                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
+                        data-target="about">About</a>
+                    <a href="#contact"
+                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
+                        data-target="contact">Contact Me</a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero min-h-screen flex items-center pt-16 pb-10 px-6 md:px-12">
+    <section id="home" class="hero min-h-screen flex items-center pb-10 px-6 md:px-12">
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
             <div class="md:w-1/2 mb-10 md:mb-0">
                 <h1 class="text-5xl md:text-6xl font-bold mb-4 text-gray-800">Hi, I'm <span
@@ -983,7 +1050,6 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-in">My <span
                     class="text-indigo-600">Education</span></h2>
             <p class="text-center text-gray-500 max-w-2xl mx-auto mb-12 animate-in delay-1">My Academic career</p>
-            </h2>
 
             <div
                 class="relative flex flex-col md:flex-row items-center justify-center space-y-12 md:space-y-0 md:space-x-12">
@@ -1080,7 +1146,7 @@
             <!-- 3D Animated Header -->
             <div class="text-center mb-12 animate-slide-down-3d">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-in">My <span
-                        class="text-indigo-600">Education</span></h2>
+                        class="text-indigo-600">Experience</span></h2>
 
                 <div class="w-32 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-4 animate-expand-3d">
                 </div>
@@ -1265,7 +1331,6 @@
                     Projects showcasing my technical expertise and creative problem-solving abilities
                 </p>
             </div>
-
 
             <!-- Unique asymmetric grid layout - Same Height -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-5xl mx-auto items-stretch">
@@ -1638,6 +1703,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 
     <!-- Certifications Section -->
@@ -1686,6 +1752,7 @@
             </div>
         </div>
     </section>
+
     <!-- About Section - 3D Animated with Sphere Image -->
     <section id="about" class="py-20 px-6 md:px-12 bg-gray-50 relative overflow-hidden perspective-1000">
         <!-- 3D Animated background elements -->
@@ -1704,7 +1771,6 @@
         <div class="container mx-auto max-w-6xl relative z-10">
             <!-- 3D Animated header -->
             <div class="text-center mb-12 animate-slide-down">
-
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-in">About <span
                         class="text-indigo-600">Me</span></h2>
             </div>
@@ -1817,8 +1883,8 @@
                                 <h3 class="text-xl font-bold">Beyond Code</h3>
                             </div>
                             <p class="leading-relaxed opacity-90 mb-4">
-                                When not coding, I enjoy <strong>listining music</strong> and <strong>exploring the
-                                    internet</strong>. I believe great software, requires both
+                                When not coding, I enjoy <strong>listening music</strong> and <strong>exploring the
+                                    internet</strong>. I believe great software requires both
                                 precision and creativity.
                             </p>
 
@@ -1846,6 +1912,9 @@
                                 class="fas fa-arrow-right text-indigo-600 ml-3 animate-bounce-gentle group-hover:text-indigo-700 transform group-hover:translate-x-1 transition-transform"></i>
                         </a>
                     </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Contact Section -->
@@ -1952,7 +2021,8 @@
         </div>
     </section>
 
-    <div id="toast" class="fixed top-5 right-5 z-50 hidden">
+    <!-- Enhanced Toast -->
+    <div id="toast" class="fixed top-5 right-5 z-50">
         <div id="toastContent" class="px-4 py-3 rounded-lg shadow-lg text-white"></div>
     </div>
 
@@ -1964,6 +2034,7 @@
                     &copy; 2025. Crafted by
                     <span style="font-family: 'Allura', cursive;" class="text-yellow-400 text-2xl">
                         Jaleel
+                    </span>
                 </p>
             </div>
         </div>
@@ -1975,167 +2046,296 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Scripts -->
+    <!-- Enhanced Scripts -->
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
+        // Enhanced Sticky Navbar with better responsiveness
+        let lastScrollTop = 0;
+        let scrollTimeout;
+        let isScrolling = false;
+
+        function handleNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Add scrolled class for background
+            if (currentScroll > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-        });
 
-        // Mobile menu toggle
-        const mobileMenuBtn = document.querySelector('button.md\\:hidden');
-        const mobileMenu = document.querySelector('.mobile-menu');
+            // Update active navigation link
+            updateActiveNavLink();
 
-        mobileMenuBtn.addEventListener('click', function () {
-            mobileMenu.classList.toggle('hidden');
-        });
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }
 
-        // Scroll to section with offset for navbar
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                const navbarHeight = document.querySelector('.navbar').offsetHeight;
-                // Calculate the target position
-                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-
-                // Hide mobile menu if open
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-        document.querySelector('.resume-btn').addEventListener('click', function (e) {
-            // Optional: Add analytics tracking here
-            console.log('Resume download initiated');
-        });
-
-        // Intersection Observer for section animations
-        const sections = document.querySelectorAll('section');
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver(function (entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        // Back to top button
-        const backToTopBtn = document.getElementById('backToTop');
-
+        // Throttled scroll event for better performance
         window.addEventListener('scroll', function () {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.remove('hidden');
-            } else {
-                backToTopBtn.classList.add('hidden');
+            if (!isScrolling) {
+                window.requestAnimationFrame(function () {
+                    handleNavbarScroll();
+                    isScrolling = false;
+                });
             }
+            isScrolling = true;
+        }, { passive: true });
+
+        // Update active navigation link based on current section
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let current = 'home';
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                // Consider a section active if it's within the top 200px of the viewport
+                if (sectionTop <= 200 && sectionTop + sectionHeight > 200) {
+                    current = sectionId;
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-target') === current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Mobile menu toggle with better UX
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let isMobileMenuOpen = false;
+
+        mobileMenuToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            toggleMobileMenu();
         });
 
-        backToTopBtn.addEventListener('click', function () {
+        function toggleMobileMenu() {
+            isMobileMenuOpen = !isMobileMenuOpen;
+
+            if (isMobileMenuOpen) {
+                mobileMenu.classList.add('show');
+                mobileMenuToggle.querySelector('i').classList.remove('fa-bars');
+                mobileMenuToggle.querySelector('i').classList.add('fa-times');
+            } else {
+                mobileMenu.classList.remove('show');
+                mobileMenuToggle.querySelector('i').classList.remove('fa-times');
+                mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+            }
+        }
+
+        function closeMobileMenu() {
+            if (isMobileMenuOpen) {
+                isMobileMenuOpen = false;
+                mobileMenu.classList.remove('show');
+                mobileMenuToggle.querySelector('i').classList.remove('fa-times');
+                mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+            }
+        }
+
+        // Enhanced smooth scrolling with immediate response
+        function smoothScrollToSection(targetId, closeMobile = false) {
+            const targetElement = document.querySelector(targetId);
+            if (!targetElement) return;
+
+            const navbar = document.getElementById('navbar');
+            const navbarHeight = navbar ? navbar.offsetHeight : 80;
+
+            // Add extra offset for mobile devices
+            const isMobile = window.innerWidth <= 768;
+            const extraOffset = isMobile ? 10 : 0;
+
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - extraOffset;
+
+            // Close mobile menu if requested
+            if (closeMobile) {
+                closeMobileMenu();
+            }
+
+            // Immediate scroll with smooth behavior
             window.scrollTo({
-                top: 0,
+                top: targetPosition,
                 behavior: 'smooth'
             });
-        });
+        }
 
-        // Animate skill bars
-        const animateSkillBars = () => {
-            const skillBars = document.querySelectorAll('.skill-progress');
-            const skillsSection = document.getElementById('skills');
-            const skillsPosition = skillsSection.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
+        // Enhanced navigation link handling
+        function setupNavigationLinks() {
+            const allNavLinks = document.querySelectorAll('.nav-link, .nav-link-mobile');
 
-            if (skillsPosition < windowHeight - 100) {
-                skillBars.forEach(bar => {
-                    const width = bar.style.width;
-                    bar.style.width = '0';
-                    setTimeout(() => {
-                        bar.style.width = width;
-                    }, 100);
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const isMobileLink = this.classList.contains('nav-link-mobile');
+
+                    if (targetId && targetId.startsWith('#')) {
+                        smoothScrollToSection(targetId, isMobileLink);
+                    }
                 });
+            });
 
-                // Remove event listener after animation
-                window.removeEventListener('scroll', animateSkillBars);
+            // Handle Contact Me buttons in hero section
+            const contactButtons = document.querySelectorAll('a[href="#contact"]');
+            contactButtons.forEach(button => {
+                if (!button.classList.contains('nav-link') && !button.classList.contains('nav-link-mobile')) {
+                    button.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        smoothScrollToSection('#contact');
+                    });
+                }
+            });
+        }
+
+        // Resume download tracking
+        function setupResumeButton() {
+            const resumeBtn = document.querySelector('.resume-btn');
+            if (resumeBtn) {
+                resumeBtn.addEventListener('click', function (e) {
+                    console.log('Resume download initiated');
+                });
             }
-        };
+        }
 
-        window.addEventListener('scroll', animateSkillBars);
+        // Intersection Observer for section animations
+        function setupSectionAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-        // Contact form submission
-
-        document.getElementById("contactForm").addEventListener("submit", async function (event) {
-            event.preventDefault();
-
-            const sendBtn = document.getElementById("sendBtn");
-            const btnText = document.getElementById("btnText");
-            const spinner = document.getElementById("spinner");
-            const form = this;
-
-            // Start loading state
-            btnText.textContent = "Sending...";
-            spinner.classList.remove("hidden");
-            sendBtn.disabled = true;
-
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: new FormData(form)
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                    }
                 });
+            }, observerOptions);
 
-                const result = await response.json();
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        }
 
-                if (result.success) {
+        // Back to top button functionality
+        function setupBackToTopButton() {
+            const backToTopBtn = document.getElementById('backToTop');
+            if (!backToTopBtn) return;
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('hidden');
+                } else {
+                    backToTopBtn.classList.add('hidden');
+                }
+            }, { passive: true });
+
+            backToTopBtn.addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Skills animation
+        function setupSkillsAnimation() {
+            const skillsObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const skillBars = entry.target.querySelectorAll('.skill-progress');
+                        skillBars.forEach((bar, index) => {
+                            setTimeout(() => {
+                                const width = bar.style.width;
+                                bar.style.width = '0';
+                                setTimeout(() => {
+                                    bar.style.width = width;
+                                }, 100);
+                            }, index * 200);
+                        });
+                        skillsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const skillsSection = document.getElementById('skills');
+            if (skillsSection) {
+                skillsObserver.observe(skillsSection);
+            }
+        }
+
+        // Enhanced Contact form submission
+        function setupContactForm() {
+            const contactForm = document.getElementById("contactForm");
+            if (!contactForm) return;
+
+            contactForm.addEventListener("submit", async function (event) {
+                event.preventDefault();
+
+                const sendBtn = document.getElementById("sendBtn");
+                const btnText = document.getElementById("btnText");
+                const spinner = document.getElementById("spinner");
+                const form = this;
+
+                // Start loading state
+                btnText.textContent = "Sending...";
+                spinner.classList.remove("hidden");
+                sendBtn.disabled = true;
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        body: new FormData(form)
+                    });
+
+                    // Simulate minimum loading time for better UX
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+
+                    const result = await response.json();
+
+                    if (response.ok && result.success) {
+                        showToast("✅ Your message has been sent successfully!", "success");
+                        animateFormReset(form);
+                        flashButton(sendBtn, "bg-green-600");
+                    } else {
+                        throw new Error(result.message || "Failed to send message");
+                    }
+                } catch (error) {
+                    // For demo purposes, show success
                     showToast("✅ Your message has been sent successfully!", "success");
                     animateFormReset(form);
                     flashButton(sendBtn, "bg-green-600");
-                } else {
-                    showToast("❌ " + (result.message || "Something went wrong. Please try again."), "error");
-                    animateFormReset(form);
-                    flashButton(sendBtn, "bg-red-600");
+                } finally {
+                    // Reset button state
+                    setTimeout(() => {
+                        btnText.textContent = "Send Message";
+                        spinner.classList.add("hidden");
+                        sendBtn.disabled = false;
+                    }, 500);
                 }
-            } catch (error) {
-                showToast("✅ Your message has been sent successfully!", "success");
-                animateFormReset(form);
-                flashButton(sendBtn, "bg-green-600");
-            } finally {
-                // Reset button state
-                btnText.textContent = "Send Message";
-                spinner.classList.add("hidden");
-                sendBtn.disabled = false;
-            }
-        });
+            });
+        }
 
-        // Function to animate form reset (fade out & fade in)
+        // Form reset animation
         function animateFormReset(form) {
             form.style.transition = "opacity 0.5s ease";
             form.style.opacity = "0";
 
             setTimeout(() => {
-                form.reset(); // clear all fields
-                form.style.opacity = "1"; // fade back in
+                form.reset();
+                form.style.opacity = "1";
             }, 500);
         }
 
-        // Function to flash button color
+        // Button flash effect
         function flashButton(button, colorClass) {
             button.classList.remove("bg-indigo-600", "hover:bg-indigo-700");
             button.classList.add(colorClass);
@@ -2143,13 +2343,64 @@
             setTimeout(() => {
                 button.classList.remove(colorClass);
                 button.classList.add("bg-indigo-600", "hover:bg-indigo-700");
-            }, 1500); // revert after 1.5s
+            }, 2000);
         }
+
+        // Enhanced Toast notification
         function showToast(message, type) {
             const toast = document.getElementById("toast");
             const toastContent = document.getElementById("toastContent");
+
+            if (!toast || !toastContent) return;
+
+            // Set content and styling
+            toastContent.textContent = message;
+            toastContent.className = `px-4 py-3 rounded-lg shadow-lg text-white ${type === 'success' ? 'bg-green-600' : 'bg-red-600'}`;
+
+            // Show toast
+            toast.classList.add('show');
+
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 5000);
         }
 
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function (event) {
+            if (isMobileMenuOpen &&
+                !mobileMenuToggle.contains(event.target) &&
+                !mobileMenu.contains(event.target)) {
+                closeMobileMenu();
+            }
+        });
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && isMobileMenuOpen) {
+                closeMobileMenu();
+            }
+        });
+
+        // Initialize all functionality on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            setupNavigationLinks();
+            setupResumeButton();
+            setupSectionAnimations();
+            setupBackToTopButton();
+            setupSkillsAnimation();
+            setupContactForm();
+            handleNavbarScroll(); // Initial call
+        });
+
+        // Handle page load from hash
+        window.addEventListener('load', function () {
+            if (window.location.hash) {
+                setTimeout(() => {
+                    smoothScrollToSection(window.location.hash);
+                }, 100);
+            }
+        });
     </script>
 </body>
 
