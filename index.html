@@ -90,30 +90,145 @@
             font-weight: 600;
         }
 
-        /* Mobile menu styles */
+        /* Compact Mobile Menu Styles */
         .mobile-menu {
-            background-color: rgba(255, 255, 255, 0.98);
+            position: absolute;
+            top: 100%;
+            left: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-20px) scale(0.95);
+            opacity: 0;
+            visibility: hidden;
+            margin-top: 10px;
             max-height: 0;
             overflow: hidden;
         }
 
         .mobile-menu.show {
-            max-height: 400px;
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+            max-height: 280px;
         }
 
-        .mobile-menu a {
-            transition: all 0.3s ease;
+        /* Compact Grid Layout for Mobile Menu */
+        .mobile-menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            padding: 20px 16px;
+        }
+
+        .mobile-menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 8px;
+            border-radius: 12px;
+            background: rgba(79, 70, 229, 0.05);
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: var(--dark);
             cursor: pointer;
+            min-height: 65px;
         }
 
-        .mobile-menu a:hover {
-            background-color: rgba(79, 70, 229, 0.1);
-            transform: translateX(5px);
+        .mobile-menu-item:hover {
+            background: rgba(79, 70, 229, 0.1);
+            border-color: rgba(79, 70, 229, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        .mobile-menu-icon {
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .mobile-menu-text {
+            font-size: 11px;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* Enhanced Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            background: rgba(79, 70, 229, 0.1);
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(79, 70, 229, 0.15);
+            border-color: rgba(79, 70, 229, 0.4);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu-toggle.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* Hamburger Animation */
+        .hamburger {
+            width: 18px;
+            height: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: currentColor;
+            position: absolute;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 0;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 5px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 10px;
+        }
+
+        .mobile-menu-toggle.active .hamburger span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 5px;
+        }
+
+        .mobile-menu-toggle.active .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active .hamburger span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 5px;
         }
 
         /* Hero section */
@@ -950,6 +1065,28 @@
                 scroll-margin-top: 70px;
             }
         }
+
+        /* Additional responsive styles for mobile menu */
+        @media (max-width: 480px) {
+            .mobile-menu {
+                left: 10px;
+                right: 10px;
+            }
+
+            .mobile-menu-grid {
+                padding: 16px 12px;
+                gap: 6px;
+            }
+
+            .mobile-menu-item {
+                padding: 10px 6px;
+                min-height: 60px;
+            }
+
+            .mobile-menu-text {
+                font-size: 10px;
+            }
+        }
     </style>
     <script>
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
@@ -980,41 +1117,51 @@
                     Me</a>
             </div>
 
-            <!-- Simple Hamburger Menu Button -->
-            <button class="md:hidden focus:outline-none z-10 relative" id="mobileMenuToggle">
-                <i class="fas fa-bars text-2xl text-gray-700"></i>
+            <!-- Enhanced Hamburger Menu Button -->
+            <button class="md:hidden mobile-menu-toggle" id="mobileMenuToggle">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </button>
         </div>
 
-        <!-- Enhanced Mobile menu -->
+        <!-- Compact Mobile Menu with Grid Layout -->
         <div class="mobile-menu md:hidden" id="mobileMenu">
-            <div class="px-6 py-4">
-                <div class="flex flex-col space-y-4">
-                    <a href="#home"
-                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
-                        data-target="home">Home</a>
-                    <a href="#education"
-                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
-                        data-target="education">Education</a>
-                    <a href="#experience"
-                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
-                        data-target="experience">Experience</a>
-                    <a href="#projects"
-                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
-                        data-target="projects">Projects</a>
-                    <a href="#skills"
-                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
-                        data-target="skills">Skills</a>
-                    <a href="#certifications"
-                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
-                        data-target="certifications">Certifications</a>
-                    <a href="#about"
-                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
-                        data-target="about">About</a>
-                    <a href="#contact"
-                        class="nav-link-mobile text-gray-700 hover:text-indigo-600 py-2 px-3 rounded transition-colors"
-                        data-target="contact">Contact Me</a>
-                </div>
+            <div class="mobile-menu-grid">
+                <a href="#home" class="mobile-menu-item nav-link-mobile" data-target="home">
+                    <i class="fas fa-home mobile-menu-icon"></i>
+                    <span class="mobile-menu-text">Home</span>
+                </a>
+                <a href="#education" class="mobile-menu-item nav-link-mobile" data-target="education">
+                    <i class="fas fa-graduation-cap mobile-menu-icon"></i>
+                    <span class="mobile-menu-text">Education</span>
+                </a>
+                <a href="#experience" class="mobile-menu-item nav-link-mobile" data-target="experience">
+                    <i class="fas fa-briefcase mobile-menu-icon"></i>
+                    <span class="mobile-menu-text">Experience</span>
+                </a>
+                <a href="#projects" class="mobile-menu-item nav-link-mobile" data-target="projects">
+                    <i class="fas fa-code mobile-menu-icon"></i>
+                    <span class="mobile-menu-text">Projects</span>
+                </a>
+                <a href="#skills" class="mobile-menu-item nav-link-mobile" data-target="skills">
+                    <i class="fas fa-tools mobile-menu-icon"></i>
+                    <span class="mobile-menu-text">Skills</span>
+                </a>
+                <a href="#certifications" class="mobile-menu-item nav-link-mobile" data-target="certifications">
+                    <i class="fas fa-certificate mobile-menu-icon"></i>
+                    <span class="mobile-menu-text">Certificates</span>
+                </a>
+                <a href="#about" class="mobile-menu-item nav-link-mobile" data-target="about">
+                    <i class="fas fa-user mobile-menu-icon"></i>
+                    <span class="mobile-menu-text">About</span>
+                </a>
+                <a href="#contact" class="mobile-menu-item nav-link-mobile" data-target="contact">
+                    <i class="fas fa-envelope mobile-menu-icon"></i>
+                    <span class="mobile-menu-text">Contact</span>
+                </a>
             </div>
         </div>
     </nav>
@@ -2107,7 +2254,7 @@
             });
         }
 
-        // Mobile menu toggle with better UX
+        // Enhanced Mobile menu toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
         let isMobileMenuOpen = false;
@@ -2122,12 +2269,10 @@
 
             if (isMobileMenuOpen) {
                 mobileMenu.classList.add('show');
-                mobileMenuToggle.querySelector('i').classList.remove('fa-bars');
-                mobileMenuToggle.querySelector('i').classList.add('fa-times');
+                mobileMenuToggle.classList.add('active');
             } else {
                 mobileMenu.classList.remove('show');
-                mobileMenuToggle.querySelector('i').classList.remove('fa-times');
-                mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+                mobileMenuToggle.classList.remove('active');
             }
         }
 
@@ -2135,8 +2280,7 @@
             if (isMobileMenuOpen) {
                 isMobileMenuOpen = false;
                 mobileMenu.classList.remove('show');
-                mobileMenuToggle.querySelector('i').classList.remove('fa-times');
-                mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+                mobileMenuToggle.classList.remove('active');
             }
         }
 
