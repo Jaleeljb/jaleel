@@ -1126,6 +1126,12 @@
             animation: slow 8s linear infinite;
         }
 
+        .dot {
+            transition: background-color 0.3s ease;
+        }
+
+
+
         /* Skill bars */
         .skill-bar {
             height: 10px;
@@ -1737,207 +1743,93 @@
         </div>
     </section>
 
-    <!-- Experience Section with Full-Width Reduced Height Card -->
+    <!-- 🌟 Interactive Auto-Sliding Experience Carousel with Touch Support -->
     <section id="experience"
-        class="py-16 md:py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 relative overflow-hidden perspective-1000">
-        <!-- 3D Animated Background Elements -->
-        <div class="absolute inset-0 opacity-10">
-            <div
-                class="floating-cube absolute top-20 left-20 w-16 h-16 bg-gradient-to-br from-blue-400 to-indigo-500 animate-float-cube">
-            </div>
-            <div
-                class="floating-cube absolute bottom-32 right-32 w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 animate-float-cube-delayed">
-            </div>
-            <div
-                class="floating-cube absolute top-1/2 right-1/4 w-20 h-20 bg-gradient-to-br from-cyan-400 to-blue-500 animate-rotate-cube">
-            </div>
-
-            <!-- Floating geometric shapes -->
-            <div class="absolute top-40 left-1/3 w-8 h-8 bg-indigo-300 rounded-full animate-orbit-experience"></div>
-            <div
-                class="absolute bottom-40 left-2/3 w-6 h-6 bg-purple-300 rounded-full animate-orbit-experience-reverse">
-            </div>
-        </div>
-
-        <!-- Animated grid pattern -->
-        <div class="absolute inset-0 opacity-5">
-            <svg class="w-full h-full animate-grid-float" viewBox="0 0 200 200">
-                <defs>
-                    <pattern id="experienceGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-width="0.5" />
-                    </pattern>
-                </defs>
-                <rect width="200" height="200" fill="url(#experienceGrid)" />
-            </svg>
-        </div>
-
-        <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <!-- 3D Animated Header -->
-            <div class="text-center mb-12 animate-slide-down-3d">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-in">My <span
-                        class="text-indigo-600">Experience</span></h2>
-
-                <div class="w-32 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-4 animate-expand-3d">
-                </div>
-                <p class="text-gray-600 max-w-2xl mx-auto text-lg animate-fade-in-up-3d">
+        class="py-16 md:py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    My <span class="text-indigo-600">Experience</span>
+                </h2>
+                <div class="w-32 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-4"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
                     My professional journey crafting digital excellence
                 </p>
             </div>
 
-            <!-- Full-Width 3D Experience Card -->
-            <div class="relative w-full max-w-7xl mx-auto animate-slide-in-experience">
-                <div class="group relative">
-                    <!-- 3D Card Shadow/Depth Effect -->
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-indigo-200 to-purple-200 rounded-2xl transform rotate-1 scale-105 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
+            <!-- Carousel Container -->
+            <div class="relative overflow-hidden group select-none" id="experienceCarousel">
+                <!-- Slides Wrapper -->
+                <div class="flex transition-transform duration-700 ease-in-out" id="experienceSlides">
+
+                    <!-- Slide 1 -->
+                    <div class="min-w-full flex-shrink-0 px-4">
+                        <div
+                            class="bg-white rounded-2xl shadow-xl p-6 max-w-2xl mx-auto border border-gray-100 hover:-translate-y-2 transition-all duration-300">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Software Tester Intern</h3>
+                            <h4 class="text-blue-600 font-semibold mb-1">Nextrics Software Solutions</h4>
+                            <p class="text-sm text-gray-500 mb-3">Mar 2025 - Sep 2025</p>
+                            <ul class="list-disc ml-5 text-gray-700 text-sm space-y-1">
+                                <li>Automated testing using Selenium & TestNG</li>
+                                <li>Improved defect detection and SLA compliance</li>
+                                <li>Worked with Regression & Functional Testing</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <!-- Main Full-Width Experience Card -->
-                    <div
-                        class="relative bg-white rounded-2xl p-6 md:p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 transform-3d hover:-translate-y-2 hover:rotate-x-1 border border-gray-100 animate-card-float">
-
-                        <!-- Decorative 3D Elements -->
+                    <!-- Slide 2 -->
+                    <div class="min-w-full flex-shrink-0 px-4">
                         <div
-                            class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-indigo-400/20 to-purple-500/20 rounded-full animate-spin-slow-experience blur-xl">
-                        </div>
-                        <div
-                            class="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-br from-cyan-400/15 to-blue-500/15 rounded-full animate-pulse blur-lg">
-                        </div>
-
-                        <!-- Card Header - Horizontal Layout -->
-                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 relative z-10">
-                            <div class="flex flex-col md:flex-row md:items-center md:space-x-4 mb-4 lg:mb-0">
-                                <h3
-                                    class="text-2xl md:text-3xl font-bold text-gray-800 animate-text-reveal-3d group-hover:text-indigo-700 transition-colors">
-                                    Software Tester Intern
-                                </h3>
-                                <div class="flex items-center mt-2 md:mt-0 animate-slide-in-company">
-                                    <div
-                                        class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-2 shadow-lg transform-3d hover:rotate-12 transition-transform">
-                                        <i class="fas fa-building text-white text-xs"></i>
-                                    </div>
-                                    <h4
-                                        class="text-lg text-blue-600 font-semibold hover:text-blue-700 transition-colors">
-                                        Nextrics Software Solutions</h4>
-                                </div>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <span
-                                    class="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full text-sm font-bold shadow-lg transform-3d hover:scale-110 hover:rotate-3 transition-all animate-badge-glow">
-                                    Mar 2025 - Sep 2025
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Achievements in Grid Layout -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                            <div
-                                class="achievement-item bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-xl hover:shadow-lg transition-all transform-3d hover:translate-y-1 animate-achievement-1">
-                                <div class="flex items-center mb-2">
-                                    <div
-                                        class="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse mr-2">
-                                    </div>
-                                    <span class="text-green-600 font-bold text-lg">100%</span>
-                                </div>
-                                <p class="text-gray-700 text-sm leading-relaxed">
-                                    <strong>Test Coverage</strong> - Collaborated with teams to ensure complete
-                                    functional specification coverage
-                                </p>
-                            </div>
-
-                            <div
-                                class="achievement-item bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-xl hover:shadow-lg transition-all transform-3d hover:translate-y-1 animate-achievement-2">
-                                <div class="flex items-center mb-2">
-                                    <div class="w-3 h-3 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full animate-pulse mr-2"
-                                        style="animation-delay: 0.2s"></div>
-                                    <span class="text-blue-600 font-bold text-lg">98%</span>
-                                </div>
-                                <p class="text-gray-700 text-sm leading-relaxed">
-                                    <strong>Defect Detection</strong> - Automated test cases using Selenium, TestNG and
-                                    Java
-                                </p>
-                            </div>
-
-                            <div
-                                class="achievement-item bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-xl hover:shadow-lg transition-all transform-3d hover:translate-y-1 animate-achievement-3">
-                                <div class="flex items-center mb-2">
-                                    <div class="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-pulse mr-2"
-                                        style="animation-delay: 0.4s"></div>
-                                    <span class="text-purple-600 font-bold text-lg">35%</span>
-                                </div>
-                                <p class="text-gray-700 text-sm leading-relaxed">
-                                    <strong>Defect Reduction</strong> - Comprehensive regression, integration and
-                                    functional testing
-                                </p>
-                            </div>
-
-                            <div
-                                class="achievement-item bg-gradient-to-br from-orange-50 to-red-50 p-4 rounded-xl hover:shadow-lg transition-all transform-3d hover:translate-y-1 animate-achievement-4">
-                                <div class="flex items-center mb-2">
-                                    <div class="w-3 h-3 bg-gradient-to-r from-orange-400 to-red-500 rounded-full animate-pulse mr-2"
-                                        style="animation-delay: 0.6s"></div>
-                                    <span class="text-red-600 font-bold text-lg">95%</span>
-                                </div>
-                                <p class="text-gray-700 text-sm leading-relaxed">
-                                    <strong>SLA Compliance</strong> - Critical bugs resolved within service level
-                                    agreements
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Tech Stack and Timeline in Horizontal Layout -->
-                        <div
-                            class="flex flex-col lg:flex-row lg:items-center lg:justify-between pt-4 border-t border-gray-100">
-                            <div class="mb-4 lg:mb-0">
-                                <h5 class="text-sm font-semibold text-gray-600 mb-3">Key Technologies:</h5>
-                                <div class="flex flex-wrap gap-3">
-                                    <div
-                                        class="bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-md transform-3d hover:scale-110 hover:rotate-3 transition-all cursor-pointer animate-float-gentle">
-                                        Selenium WebDriver
-                                    </div>
-                                    <div class="bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-md transform-3d hover:scale-110 hover:rotate-3 transition-all cursor-pointer animate-float-gentle"
-                                        style="animation-delay: 0.1s">
-                                        Java
-                                    </div>
-                                    <div class="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-md transform-3d hover:scale-110 hover:rotate-3 transition-all cursor-pointer animate-float-gentle"
-                                        style="animation-delay: 0.2s">
-                                        TestNG
-                                    </div>
-                                    <div class="bg-gradient-to-r from-blue-400 to-cyan-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-md transform-3d hover:scale-110 hover:rotate-3 transition-all cursor-pointer animate-float-gentle"
-                                        style="animation-delay: 0.3s">
-                                        Regression Testing
-                                    </div>
-                                    <div class="bg-gradient-to-r from-purple-400 to-indigo-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-md transform-3d hover:scale-110 hover:rotate-3 transition-all cursor-pointer animate-float-gentle"
-                                        style="animation-delay: 0.4s">
-                                        Functional Testing
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Vertical Timeline Indicator -->
-                            <div class="flex items-center space-x-4 lg:flex-col lg:space-x-0 lg:space-y-2">
-                                <div class="flex items-center lg:flex-col space-x-2 lg:space-x-0 lg:space-y-1">
-                                    <div
-                                        class="w-4 h-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full shadow-lg animate-pulse-3d">
-                                    </div>
-                                    <div
-                                        class="hidden lg:block w-px h-8 bg-gradient-to-b from-indigo-400 to-purple-500">
-                                    </div>
-                                    <div
-                                        class="w-3 h-3 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full animate-pulse opacity-50">
-                                    </div>
-                                </div>
-                                <div class="text-right lg:text-center">
-                                    <p class="text-sm font-semibold text-gray-600">Current Position</p>
-                                    <p class="text-xs text-gray-500">Next chapter loading...</p>
-                                </div>
-                            </div>
+                            class="bg-gradient-to-br from-green-100 to-teal-100 rounded-2xl shadow-xl p-6 max-w-2xl mx-auto border border-teal-200 hover:-translate-y-2 transition-all duration-300">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Cyber Security Trainer (Freelance)</h3>
+                            <h4 class="text-teal-700 font-semibold mb-1">Coading Wizardz</h4>
+                            <p class="text-sm text-gray-500 mb-3">July 2024 - Sep 2024</p>
+                            <ul class="list-disc ml-5 text-gray-700 text-sm space-y-1">
+                                <li>Conducted hands-on training in VAPT & Network Security</li>
+                                <li>Provided mentoring and one-on-one student support</li>
+                                <li>Used Nmap, Burp Suite, Wireshark & OWASP ZAP for demos</li>
+                            </ul>
                         </div>
                     </div>
+
+                    <!-- Slide 3 -->
+                    <div class="min-w-full flex-shrink-0 px-4">
+                        <div
+                            class="bg-gradient-to-br from-teal-100 to-green-100 rounded-2xl shadow-xl p-6 max-w-2xl mx-auto border border-green-200 hover:-translate-y-2 transition-all duration-300">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Cyber Security Analyst Intern</h3>
+                            <h4 class="text-teal-700 font-semibold mb-1">Vectority Solutions</h4>
+                            <p class="text-sm text-gray-500 mb-3">June 2023 - Oct 2023</p>
+                            <ul class="list-disc ml-5 text-gray-700 text-sm space-y-1">
+                                <li>Monitored and analyzed network traffic for threats</li>
+                                <li>Conducted vulnerability assessments and remediation</li>
+                                <li>Contributed to security policies and documentation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <button id="prevBtn"
+                    class="absolute top-1/2 left-4 -translate-y-1/2 bg-white/70 hover:bg-white text-indigo-600 rounded-full p-3 shadow-md transition duration-300 focus:outline-none hidden md:block">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="nextBtn"
+                    class="absolute top-1/2 right-4 -translate-y-1/2 bg-white/70 hover:bg-white text-indigo-600 rounded-full p-3 shadow-md transition duration-300 focus:outline-none hidden md:block">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- Dots -->
+                <div class="flex justify-center space-x-2 mt-6">
+                    <span class="dot w-3 h-3 bg-indigo-600 rounded-full cursor-pointer"></span>
+                    <span class="dot w-3 h-3 bg-gray-300 rounded-full cursor-pointer"></span>
+                    <span class="dot w-3 h-3 bg-gray-300 rounded-full cursor-pointer"></span>
                 </div>
             </div>
         </div>
     </section>
+
+
 
     <!-- Projects Section with Unique Design - Same Height Cards -->
     <section id="projects"
@@ -2007,7 +1899,8 @@
 
                                 <div class="flex-grow">
                                     <p class="text-gray-600 text-sm leading-relaxed">
-                                        Developed a responsive personal portfolio website optimized for both desktop
+                                        Developed a responsive personal portfolio website optimized for both
+                                        desktop
                                         and
                                         mobile devices,
                                         improving user experience through seamless navigation and modern design
@@ -2146,7 +2039,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-in">My <span
                     class="text-indigo-600">Skills</span></h2>
-            <p class="text-center text-gray-500 max-w-2xl mx-auto mb-12 animate-in delay-1">Technologies I work with</p>
+            <p class="text-center text-gray-500 max-w-2xl mx-auto mb-12 animate-in delay-1">Technologies I work
+                with</p>
 
             <div class="grid md:grid-cols-2 gap-8 animate-in delay-2">
                 <div>
@@ -2369,7 +2263,8 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Pre Security</h3>
                         <p class="text-gray-600 mb-4">TryHackMe • 2023</p>
-                        <p class="text-gray-700">Demonstrated proficiency in securing and maintaining applications by
+                        <p class="text-gray-700">Demonstrated proficiency in securing and maintaining
+                            applications by
                             implementing industry-standard security protocols and best practices.</p>
                     </div>
                 </div>
@@ -2381,8 +2276,10 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Red Teaming</h3>
                         <p class="text-gray-600 mb-4">TryHackMe • 2023</p>
-                        <p class="text-gray-700">Explored and applied advanced Red Teaming methodologies, tools, and
-                            techniques in simulated attack scenarios to assess and enhance organizational security
+                        <p class="text-gray-700">Explored and applied advanced Red Teaming methodologies, tools,
+                            and
+                            techniques in simulated attack scenarios to assess and enhance organizational
+                            security
                             posture</p>
                     </div>
                 </div>
@@ -2394,7 +2291,8 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Web Fundamentals</h3>
                         <p class="text-gray-600 mb-4">TryHackMe • 2023</p>
-                        <p class="text-gray-700">Acquired practical experience in web development fundamentals through
+                        <p class="text-gray-700">Acquired practical experience in web development fundamentals
+                            through
                             building responsive interfaces using HTML, CSS, and JavaScript.</p>
                     </div>
                 </div>
@@ -2478,7 +2376,8 @@
                             <!-- Personal info with 3D card -->
                             <div
                                 class="mt-8 text-center space-y-3 bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl transform-3d hover:translate-y-2 transition-transform duration-500">
-                                <h3 class="text-2xl font-bold text-gray-800 animate-text-reveal">Shaik Jaleel Basha</h3>
+                                <h3 class="text-2xl font-bold text-gray-800 animate-text-reveal">Shaik Jaleel
+                                    Basha</h3>
                                 <div
                                     class="inline-flex items-center bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-semibold hover:scale-105 transition-transform">
                                     <i class="fas fa-code mr-2 animate-spin-slow"></i>
@@ -2510,7 +2409,8 @@
                             I'm <strong class="text-indigo-600 animate-text-glow">Shaik Jaleel Basha</strong>, a
                             passionate 24-year-old
                             tech professional with a <strong class="text-indigo-600">Bachelor's in Information
-                                Technology</strong>. Specializing in <strong class="text-indigo-600">web development and
+                                Technology</strong>. Specializing in <strong class="text-indigo-600">web
+                                development and
                                 automation testing</strong>, I thrive on solving complex problems and building
                             innovative digital solutions.
                         </p>
@@ -2532,7 +2432,8 @@
                                 <h3 class="text-xl font-bold">Beyond Code</h3>
                             </div>
                             <p class="leading-relaxed opacity-90 mb-4">
-                                When not coding, I enjoy <strong>listening music</strong> and <strong>exploring the
+                                When not coding, I enjoy <strong>listening music</strong> and <strong>exploring
+                                    the
                                     internet</strong>. I believe great software requires both
                                 precision and creativity.
                             </p>
@@ -2555,7 +2456,8 @@
                             class="inline-flex items-center bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-full px-6 py-3 hover:shadow-lg transition-all transform-3d hover:translate-y-1 hover:scale-105 cursor-pointer group">
                             <div class="w-2 h-2 bg-green-400 rounded-full animate-ping mr-3 group-hover:bg-green-500">
                             </div>
-                            <span class="text-gray-700 font-medium group-hover:text-gray-800">Ready to collaborate and
+                            <span class="text-gray-700 font-medium group-hover:text-gray-800">Ready to
+                                collaborate and
                                 create amazing solutions!</span>
                             <i
                                 class="fas fa-arrow-right text-indigo-600 ml-3 animate-bounce-gentle group-hover:text-indigo-700 transform group-hover:translate-x-1 transition-transform"></i>
@@ -2956,6 +2858,7 @@
             });
         }
 
+
         // Skills animation
         function setupSkillsAnimation() {
             const skillsObserver = new IntersectionObserver(function (entries) {
@@ -3111,6 +3014,79 @@
                 }, 100);
             }
         });
+
+
+        const slides = document.querySelector('#experienceSlides');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = dots.length;
+        const carousel = document.querySelector('#experienceCarousel');
+        let currentSlide = 0;
+        let autoSlide;
+        let startX = 0, endX = 0;
+
+        function updateCarousel() {
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('bg-indigo-600', i === currentSlide);
+                dot.classList.toggle('bg-gray-300', i !== currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        document.querySelector('#nextBtn').addEventListener('click', nextSlide);
+        document.querySelector('#prevBtn').addEventListener('click', prevSlide);
+
+        dots.forEach((dot, i) => dot.addEventListener('click', () => {
+            currentSlide = i;
+            updateCarousel();
+        }));
+
+        // Auto Slide
+        function startAutoSlide() {
+            autoSlide = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlide);
+        }
+
+        // Pause on hover
+        carousel.addEventListener('mouseenter', stopAutoSlide);
+        carousel.addEventListener('mouseleave', startAutoSlide);
+
+        // Swipe Detection (Touch Events)
+        carousel.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+            stopAutoSlide();
+        });
+
+        carousel.addEventListener('touchmove', e => {
+            endX = e.touches[0].clientX;
+        });
+
+        carousel.addEventListener('touchend', () => {
+            const diff = startX - endX;
+            if (diff > 50) nextSlide();      // swipe left
+            if (diff < -50) prevSlide();     // swipe right
+            startAutoSlide();
+        });
+
+        // Initialize
+        updateCarousel();
+        startAutoSlide();
+
+
+
+
     </script>
 </body>
 
